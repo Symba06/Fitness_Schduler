@@ -6,6 +6,19 @@ This project is a Django-based web application designed to manage the schedules 
 
 The Fitness Scheduler Project provides a platform for managing the schedules of fitness trainers, clients, and administrative users. It allows trainers to set their availability, clients to book appointments with trainers, and administrators to manage users, trainers, rooms, and schedules.
 
+## Models
+
+- CustomUser
+Represents users of the system.
+- Trainer
+Stores information about fitness trainers.
+- Room
+Represents fitness rooms available for training sessions.
+- Schedule
+Manages the schedules for trainers and rooms.
+- Booking
+Tracks bookings made by users for training sessions.
+
 ## Features
 
 - User registration and authentication with role-based access control (client, trainer, admin)
@@ -19,10 +32,10 @@ The Fitness Scheduler Project provides a platform for managing the schedules of 
 
 The following endpoints are available:
 
-/api/users/: User management (GET, POST)
-/api/trainers/: Trainer management (GET, POST)
-/api/rooms/: Room management (GET, POST)
-/api/schedules/: Schedule management (GET, POST)
-/api/bookings/: Booking management (GET, POST)
-/api/auth/register/: User registration (POST)
-/api/auth/login/: User login (POST)
+- /api/users/: User management (GET, POST)
+- /api/trainers/: Trainer management (GET, POST)
+- /api/rooms/: Room management (GET, POST)
+- /api/schedules/: Schedule management (GET, POST)
+- /api/bookings/: Booking management (GET, POST)
+- /api/auth/register/: User registration (POST)
+- /api/auth/login/: User login (POST)
