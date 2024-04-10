@@ -16,20 +16,6 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
 
-    # groups = models.ManyToManyField(
-    #     'auth.Group',
-    #     related_name='custom_user_groups',
-    #     blank=True,
-    #     verbose_name='groups',
-    #     help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.',
-    # )
-    # user_permissions = models.ManyToManyField(
-    #     'auth.Permission',
-    #     related_name='custom_user_permissions',
-    #     blank=True,
-    #     verbose_name='user permissions',
-    #     help_text='Specific permissions for this user.',
-    # )
 
     class Meta:
         verbose_name = 'Пользователь'
@@ -52,6 +38,9 @@ class Trainer(models.Model):
         verbose_name = 'Тренер'
         verbose_name_plural = 'Тренеры'
 
+    def __str__(self):
+        return self.full_name
+
 class Room(models.Model):
     room_number = models.CharField(max_length=10, unique=True)
     description = models.TextField()
@@ -61,22 +50,28 @@ class Room(models.Model):
         verbose_name = 'Фитнесс залы'
         verbose_name_plural = 'Фитнесс залы'
 
+
 class Schedule(models.Model):
     trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True)
     date_and_time = models.DateTimeField(default=datetime.now)
     duration = models.DurationField(default=timedelta(hours=1))
+    start_time = models.DateTimeField(default=datetime.now)
+    end_time = models.DateTimeField(null=True)
 
     class Meta:
         verbose_name = 'Расписание'
         verbose_name_plural = 'Расписание'
 
+
 class Booking(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE)
     schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE)
+    start_time = models.DateTimeField(default=datetime.now)
+    end_time = models.DateTimeField(null=True)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
     booking_datetime = models.DateTimeField(default=datetime.now)
-    room = models.ForeignKey(Room, on_delete=models.CASCADE, default=1)
 
     class Meta:
         verbose_name = 'Запись'
